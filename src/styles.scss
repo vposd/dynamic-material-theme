@@ -1,7 +1,6 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -9,31 +8,92 @@
 // Be sure that you only ever include this mixin once!
 @include mat.core();
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$vars-primary: mat.define-palette(mat.$indigo-palette);
-$vars-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$dynamic-theme-primary: (
+  50: var(--theme-primary-50),
+  100: var(--theme-primary-100),
+  200: var(--theme-primary-200),
+  300: var(--theme-primary-300),
+  400: var(--theme-primary-400),
+  500: var(--theme-primary-500),
+  600: var(--theme-primary-600),
+  700: var(--theme-primary-700),
+  800: var(--theme-primary-800),
+  900: var(--theme-primary-900),
+  A100: var(--theme-primary-A100),
+  A200: var(--theme-primary-A200),
+  A400: var(--theme-primary-A400),
+  A700: var(--theme-primary-A700),
+  contrast: (
+    50: var(--theme-primary-contrast-50),
+    100: var(--theme-primary-contrast-100),
+    200: var(--theme-primary-contrast-200),
+    300: var(--theme-primary-contrast-300),
+    400: var(--theme-primary-contrast-400),
+    500: var(--theme-primary-contrast-500),
+    600: var(--theme-primary-contrast-600),
+    700: var(--theme-primary-contrast-700),
+    800: var(--theme-primary-contrast-800),
+    900: var(--theme-primary-contrast-900),
+    A100: var(--theme-primary-contrast-A100),
+    A200: var(--theme-primary-contrast-A200),
+    A400: var(--theme-primary-contrast-A400),
+    A700: var(--theme-primary-contrast-A700),
+  ),
+);
 
-// The warn palette is optional (defaults to red).
-$vars-warn: mat.define-palette(mat.$red-palette);
+$dynamic-theme-secondary: (
+  50: var(--theme-secondary-50),
+  100: var(--theme-secondary-100),
+  200: var(--theme-secondary-200),
+  300: var(--theme-secondary-300),
+  400: var(--theme-secondary-400),
+  500: var(--theme-secondary-500),
+  600: var(--theme-secondary-600),
+  700: var(--theme-secondary-700),
+  800: var(--theme-secondary-800),
+  900: var(--theme-secondary-900),
+  A100: var(--theme-secondary-A100),
+  A200: var(--theme-secondary-A200),
+  A400: var(--theme-secondary-A400),
+  A700: var(--theme-secondary-A700),
+  contrast: (
+    50: var(--theme-secondary-contrast-50),
+    100: var(--theme-secondary-contrast-100),
+    200: var(--theme-secondary-contrast-200),
+    300: var(--theme-secondary-contrast-300),
+    400: var(--theme-secondary-contrast-400),
+    500: var(--theme-secondary-contrast-500),
+    600: var(--theme-secondary-contrast-600),
+    700: var(--theme-secondary-contrast-700),
+    800: var(--theme-secondary-contrast-800),
+    900: var(--theme-secondary-contrast-900),
+    A100: var(--theme-secondary-contrast-A100),
+    A200: var(--theme-secondary-contrast-A200),
+    A400: var(--theme-secondary-contrast-A400),
+    A700: var(--theme-secondary-contrast-A700),
+  ),
+);
 
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$vars-theme: mat.define-light-theme((
-  color: (
-    primary: $vars-primary,
-    accent: $vars-accent,
-    warn: $vars-warn,
+$light-primary: mat.define-palette($dynamic-theme-primary);
+$light-accent: mat.define-palette($dynamic-theme-secondary);
+
+$light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $light-primary,
+      accent: $light-accent,
+    ),
   )
-));
+);
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include mat.all-component-themes($vars-theme);
+@include mat.core-theme($light-theme);
+@include mat.all-component-themes($light-theme);
 
-/* You can add global styles to this file, and also import other style files */
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
